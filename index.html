@@ -20,13 +20,16 @@
   .hero h1{font-size:34px;line-height:1.15;font-weight:900;color:var(--navy);letter-spacing:-.02em}
   .hero h1 span{color:var(--blue)}
   .hero p{margin-top:8px;font-size:14px;color:var(--mute);font-weight:500;line-height:1.5}
-  .grid{width:100%;max-width:960px;margin-top:18px;columns:2;column-gap:12px}
-  @media(min-width:700px){.grid{columns:3}}
-  @media(min-width:1000px){.grid{columns:4}}
-  .tile{display:block;break-inside:avoid;margin:0 0 12px;border-radius:8px;overflow:hidden;box-shadow:0 4px 16px rgba(11,27,63,.10);background:#fff;transition:transform .12s,box-shadow .12s}
-  .tile:active{transform:scale(.98)}
+  .grid{width:100%;max-width:960px;margin-top:18px;display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:900px){.grid{grid-template-columns:1fr 1fr 1fr}}
+  .tile{display:flex;flex-direction:column;gap:8px;padding:20px 20px 18px;border-radius:8px;background:#fff;box-shadow:0 4px 16px rgba(11,27,63,.10);border-top:5px solid var(--blue);text-decoration:none;color:var(--ink);transition:transform .12s,box-shadow .12s}
+  .tile:active{transform:scale(.985)}
   @media(hover:hover){.tile:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(11,27,63,.16)}}
-  .tile img{display:block;width:100%;height:auto}
+  .tile .nick{font-size:23px;font-weight:900;color:var(--navy);letter-spacing:-.01em;line-height:1.2}
+  .tile .role{font-size:13.5px;font-weight:500;color:var(--mute);line-height:1.45}
+  .tile .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+  .tile .chip{font-size:11px;font-weight:700;color:var(--blue);border:1.2px solid var(--blue);border-radius:4px;padding:3px 7px;line-height:1}
   /* ---------- 상세 ---------- */
   .back{align-self:flex-start;max-width:960px;width:100%;margin:6px auto 10px;padding:0 4px}
   .back a{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
@@ -91,11 +94,15 @@
     main.appendChild(hero);
     const grid = document.createElement('div');
     grid.className = 'grid';
+    const esc = s => s.replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
     for (const p of list) {
       const a = document.createElement('a');
       a.className = 'tile';
       a.href = `?id=${p.slug}`;
-      a.innerHTML = `<img src="${p.img}" alt="${p.nick} 프로필 카드" loading="lazy">`;
+      const chips = (p.keywords || []).slice(0, 5).map(k => `<span class="chip">${esc(k)}</span>`).join('');
+      a.innerHTML = `<span class="nick">${esc(p.nick)}</span>` +
+        (p.role ? `<span class="role">${esc(p.role)}</span>` : '') +
+        (chips ? `<span class="chips">${chips}</span>` : '');
       grid.appendChild(a);
     }
     main.appendChild(grid);
