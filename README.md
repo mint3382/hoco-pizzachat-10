@@ -3,7 +3,7 @@
 **2026.08.29 SAT** — 명찰의 QR을 찍으면 그 사람의 프로필 카드가 열립니다.
 아래 목록에서 바로 들어갈 수도 있어요. 카드 페이지에서 이미지 저장과 링크 이동이 됩니다.
 
-참가자 35명
+참가자 34명
 
 | 닉네임 | 하는 일 | 프로필 카드 |
 |---|---|---|
@@ -20,7 +20,6 @@
 | **김휘** | LMS 학습관리 시스템 개발 창업가 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=lwiu1iam) |
 | **로라이프** | 스타트업 경영지원 포지션에 구직중입니다. | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=yj4i9zvb) |
 | **민트(MINT)** | 마케팅하는 플러터 개발자 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=worywc4a) |
-| **민호** | 풀스택 엔지니어 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=xaldo2bm) |
 | **보라** | 퇴사 후 이직 준비 중인 iOS 엔지니어 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=aydvjzlu) |
 | **빅데디터** | 서치엔진 만드는 데이터엔지니어 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=rulii5b5) |
 | **세준** | 백엔드 개발자 및 개발자 팀장 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=vrvamurs) |
