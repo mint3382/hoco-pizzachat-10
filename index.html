@@ -4,18 +4,36 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>HOCO 피자챗 프로필 카드</title>
+<title>HOCO 피자챗 프로필북</title>
 <style>
   :root{--blue:#0066FF;--navy:#0B1B3F;--ink:#22304F;--mute:#6B7690;--line:#D9E2F5;--tint:#EEF3FF}
   *{box-sizing:border-box;margin:0;padding:0}
   html{background:var(--tint)}
   body{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;word-break:keep-all}
   header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 8px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--blue)}
-  header b{color:var(--navy);font-size:14px;letter-spacing:.06em}
-  main{flex:1;padding:8px 16px 140px;display:flex;flex-direction:column;align-items:center}
+  header b{display:flex;align-items:center;gap:8px;color:var(--navy);font-size:14px;letter-spacing:.06em}
+  header b img{width:28px;height:28px;border-radius:50%}
+  main{flex:1;padding:8px 16px 40px;display:flex;flex-direction:column;align-items:center}
+  main.detail{padding-bottom:140px}
+  /* ---------- 갤러리 ---------- */
+  .hero{width:100%;max-width:960px;padding:18px 4px 6px}
+  .hero h1{font-size:34px;line-height:1.15;font-weight:900;color:var(--navy);letter-spacing:-.02em}
+  .hero h1 span{color:var(--blue)}
+  .hero p{margin-top:8px;font-size:14px;color:var(--mute);font-weight:500;line-height:1.5}
+  .grid{width:100%;max-width:960px;margin-top:18px;columns:2;column-gap:12px}
+  @media(min-width:700px){.grid{columns:3}}
+  @media(min-width:1000px){.grid{columns:4}}
+  .tile{display:block;break-inside:avoid;margin:0 0 12px;border-radius:8px;overflow:hidden;box-shadow:0 4px 16px rgba(11,27,63,.10);background:#fff;transition:transform .12s,box-shadow .12s}
+  .tile:active{transform:scale(.98)}
+  @media(hover:hover){.tile:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(11,27,63,.16)}}
+  .tile img{display:block;width:100%;height:auto}
+  /* ---------- 상세 ---------- */
+  .back{align-self:flex-start;max-width:960px;width:100%;margin:6px auto 10px;padding:0 4px}
+  .back a{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none}
   .card{width:100%;max-width:440px;border-radius:8px;box-shadow:0 8px 30px rgba(11,27,63,.14);display:block;opacity:0;transition:opacity .25s}
   .card.on{opacity:1}
   .hint{margin-top:14px;font-size:12.5px;color:var(--mute);text-align:center;line-height:1.5}
+  .bar[hidden]{display:none}
   .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
   .bar .row{display:flex;gap:8px}
   button,a.btn{flex:1;appearance:none;border:0;border-radius:8px;padding:15px 12px;font:inherit;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;line-height:1.2}
@@ -28,11 +46,11 @@
   .empty b{display:block;color:var(--navy);font-size:20px;margin-bottom:8px}
   .toast{position:fixed;left:50%;bottom:140px;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
   .toast.on{opacity:1}
-  @media (prefers-reduced-motion:reduce){.card,.toast{transition:none}}
+  @media (prefers-reduced-motion:reduce){.card,.toast,.tile{transition:none}}
 </style>
 </head>
 <body>
-<header><b style="display:flex;align-items:center;gap:8px"><img src="hoco_logo.png" alt="" style="width:28px;height:28px;border-radius:50%">HOCO</b><span>PIZZA CHAT #10</span></header>
+<header><b><img src="hoco_logo.png" alt="">HOCO</b><span>PIZZA CHAT #10</span></header>
 <main id="main"></main>
 <div class="bar" id="bar" hidden>
   <div class="row"><button class="primary" id="save" disabled>이미지 저장</button></div>
@@ -55,11 +73,40 @@
     setTimeout(() => t.classList.remove('on'), 1800);
   }
 
-  if (!id || !/^[a-z0-9]{4,12}$/.test(id)) {
-    empty('명찰의 QR로 열어주세요', '참가자 명찰에 있는 QR을 카메라로 찍으면 그 분의 프로필 카드가 여기에 뜹니다.');
+  /* ---------- 갤러리 (id 없음) ---------- */
+  if (!id) {
+    let list;
+    try {
+      const r = await fetch('p/index.json', { cache: 'no-store' });
+      if (!r.ok) throw 0;
+      list = await r.json();
+    } catch {
+      empty('프로필북을 불러오지 못했어요', '잠시 후 새로고침해 주세요.');
+      return;
+    }
+    const hero = document.createElement('div');
+    hero.className = 'hero';
+    hero.innerHTML = `<h1>HOCO 피자챗<br><span>프로필북</span></h1>
+      <p>제10회 오프라인 피자챗 · 2026.08.29 SAT · 참가자 ${list.length}명<br>카드를 누르면 크게 보고 저장할 수 있어요.</p>`;
+    main.appendChild(hero);
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    for (const p of list) {
+      const a = document.createElement('a');
+      a.className = 'tile';
+      a.href = `?id=${p.slug}`;
+      a.innerHTML = `<img src="${p.img}" alt="${p.nick} 프로필 카드" loading="lazy">`;
+      grid.appendChild(a);
+    }
+    main.appendChild(grid);
     return;
   }
 
+  /* ---------- 상세 (id 있음) ---------- */
+  if (!/^[a-z0-9]{4,12}$/.test(id)) {
+    empty('카드를 찾지 못했어요', 'QR을 다시 찍어보시거나, 운영진에게 알려주세요.');
+    return;
+  }
   let p;
   try {
     const r = await fetch(`p/${id}.json`, { cache: 'no-store' });
@@ -70,7 +117,13 @@
     return;
   }
 
-  document.title = `${p.nick} · HOCO 피자챗 프로필 카드`;
+  document.title = `${p.nick} · HOCO 피자챗 프로필북`;
+  main.className = 'detail';
+  const back = document.createElement('div');
+  back.className = 'back';
+  back.innerHTML = `<a href="./">← 전체 프로필북</a>`;
+  main.appendChild(back);
+
   const img = document.createElement('img');
   img.className = 'card';
   img.alt = `${p.nick}의 프로필 카드`;
@@ -84,7 +137,6 @@
     : '저장 버튼을 누르면 갤러리(다운로드)에 저장돼요.';
   main.appendChild(hint);
 
-  // 링크 버튼
   const linksEl = document.getElementById('links');
   (p.links || []).slice(0, 3).forEach(l => {
     const a = document.createElement('a');
@@ -95,12 +147,11 @@
   if (!linksEl.children.length) linksEl.remove();
   document.getElementById('bar').hidden = false;
 
-  // 이미지를 미리 받아 두면 iOS 공유 시트가 사용자 탭 직후에 바로 뜬다
   const fileName = `HOCO_피자챗_${p.nick}.png`;
   let blob = null;
+  const save = document.getElementById('save');
   fetch(p.img).then(r => r.blob()).then(b => { blob = b; save.disabled = false; });
 
-  const save = document.getElementById('save');
   save.addEventListener('click', async () => {
     if (!blob) return;
     const file = new File([blob], fileName, { type: 'image/png' });
