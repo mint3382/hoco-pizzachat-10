@@ -3,7 +3,7 @@
 **2026.08.29 SAT** — 명찰의 QR을 찍으면 그 사람의 프로필 카드가 열립니다.
 아래 목록에서 바로 들어갈 수도 있어요. 카드 페이지에서 이미지 저장과 링크 이동이 됩니다.
 
-참가자 33명
+참가자 35명
 
 | 닉네임 | 하는 일 | 프로필 카드 |
 |---|---|---|
@@ -13,10 +13,12 @@
 | **yooodleee** | 피부 미용 시장 에듀 테크를 개발하는 소프트웨어 엔지니어 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=6ifdqo21) |
 | **개발자이선생** | 판타지스포츠 운영하는 창업가 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=fvxktdpk) |
 | **건디** | iOS 개발자 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=it9w6r0w) |
+| **고경철** | 데이터 엔지니어 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=1oxktusz) |
 | **권민수** | 로우레벨 기술 수직 통합 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=0kauphot) |
 | **그냥승영** | B2B온라인마케팅, 전시마케팅기획 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=pygzzjaa) |
 | **김성훈** | 제조업 현장 ai활용 데이터 자동화 작업 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=6pb3sank) |
 | **김휘** | LMS 학습관리 시스템 개발 창업가 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=lwiu1iam) |
+| **로라이프** | 스타트업 경영지원 포지션에 구직중입니다. | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=yj4i9zvb) |
 | **민트(MINT)** | 마케팅하는 플러터 개발자 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=worywc4a) |
 | **민호** | 풀스택 엔지니어 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=xaldo2bm) |
 | **보라** | 퇴사 후 이직 준비 중인 iOS 엔지니어 | [카드 보기](https://mint3382.github.io/hoco-pizzachat-10/?id=aydvjzlu) |
